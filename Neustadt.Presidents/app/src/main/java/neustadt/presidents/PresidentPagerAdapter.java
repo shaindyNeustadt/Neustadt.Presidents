@@ -19,20 +19,30 @@ private President[] presidents;
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object o){
-        return view == o;
+    public boolean isViewFromObject(View view, Object object){
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        View view = inflater.inflate(R.layout.president_pager_item, null);
-        TextView name = (TextView)view.findViewById(R.id.name);
-        TextView number = (TextView)view.findViewById(R.id.number);
-
         President president = presidents[position];
-        name.setText(president.getPresident());
-        number.setText(president.getNumber());
+        View view = inflater.inflate(R.layout.president_pager_item, null);
+
+        TextView name = (TextView)view.findViewById(R.id.name);
+        name.setText("Name: " + president.getPresident());
+        TextView number = (TextView)view.findViewById(R.id.number);
+        number.setText("Number: " + president.getNumber());
+        TextView birthYear = (TextView)view.findViewById(R.id.birthYear);
+        birthYear.setText("Birth Year: " + president.getBirthYear());
+        TextView deathYear = (TextView)view.findViewById(R.id.deathYear);
+        deathYear.setText("Death Year: " + president.getDeathYear());
+        TextView tookOffice = (TextView)view.findViewById(R.id.tookOffice);
+        tookOffice.setText("Took Office: " + president.getTookOffice());
+        TextView leftOffice = (TextView)view.findViewById(R.id.leftOffice);
+        leftOffice.setText("Left Office: " + president.getLeftOffice());
+        TextView party = (TextView)view.findViewById(R.id.party);
+        party.setText("Party: " + president.getParty());
 
         container.addView(view);
         return view;

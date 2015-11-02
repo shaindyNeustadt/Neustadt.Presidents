@@ -23,11 +23,11 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
     @Override
     public void onBindViewHolder(final PresidentViewHolder holder, int position) {
     holder.bind(presidents[position]);
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Context context = holder.itemView.getContext();
-                Intent intent = new Intent();
+                Intent intent = new Intent(context, DetailActivity.class);
                 context.startActivity(intent);
             }
         });

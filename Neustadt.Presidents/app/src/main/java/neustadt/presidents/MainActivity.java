@@ -38,5 +38,6 @@ public static President[] presidents;
         recyclerView.setAdapter(adapter);
 
 
+
     }
 }
