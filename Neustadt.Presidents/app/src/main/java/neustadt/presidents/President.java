@@ -1,6 +1,8 @@
 package neustadt.presidents;
 
-public class President {
+import java.io.Serializable;
+
+public class President implements Serializable {
     private int number;
     private String president;
     private int birthYear;
