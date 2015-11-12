@@ -39,9 +39,19 @@ private President[] presidents;
         TextView number = (TextView)view.findViewById(R.id.number);
         number.setText(String.valueOf(president.getNumber()));
         TextView years = (TextView)view.findViewById(R.id.years);
-        years.setText(president.getBirthYear() + "-" + president.getDeathYear());
+        if(president.getDeathYear() == null){
+            years.setText(president.getBirthYear() + "-Present");
+        }
+        else {
+            years.setText(president.getBirthYear() + "-" + president.getDeathYear());
+        }
         TextView officeYears = (TextView)view.findViewById(R.id.officeYears);
-        officeYears.setText(president.getTookOffice() + "-" + president.getLeftOffice());
+        if(president.getLeftOffice() == null){
+            officeYears.setText(president.getTookOffice() + "-Present");
+        }
+        else {
+            officeYears.setText(president.getTookOffice() + "-" + president.getLeftOffice());
+        }
         TextView party = (TextView)view.findViewById(R.id.party);
         party.setText(president.getParty());
 
