@@ -37,7 +37,7 @@ private President[] presidents;
         TextView name = (TextView)view.findViewById(R.id.name);
         name.setText(president.getPresident());
         TextView number = (TextView)view.findViewById(R.id.number);
-        number.setText(String.valueOf(president.getNumber()));
+        number.setText("President #" + president.getNumber());
         TextView years = (TextView)view.findViewById(R.id.years);
         if(president.getDeathYear() == null){
             years.setText(president.getBirthYear() + "-Present");
