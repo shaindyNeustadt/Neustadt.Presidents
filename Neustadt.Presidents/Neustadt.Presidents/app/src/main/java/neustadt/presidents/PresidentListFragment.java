@@ -51,7 +51,10 @@ private int[] pictures;
                 R.drawable.w, R.drawable.v, R.drawable.x, R.drawable.y, R.drawable.z, R.drawable.za, R.drawable.zb, R.drawable.zc,
                 R.drawable.zd, R.drawable.ze, R.drawable.zf, R.drawable.zg, R.drawable.zh, R.drawable.zi, R.drawable.zj, R.drawable.zk,
                 R.drawable.zl,R.drawable.zm, R.drawable.zn, R.drawable.zo, R.drawable.zk, R.drawable.zq};
-        PresidentAdapter adapter = new PresidentAdapter(presidents, pictures);
+
+        OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
+
+        PresidentAdapter adapter = new PresidentAdapter(presidents, pictures, listener);
         recyclerView.setAdapter(adapter);
 
         super.onViewCreated(view, savedInstanceState);
