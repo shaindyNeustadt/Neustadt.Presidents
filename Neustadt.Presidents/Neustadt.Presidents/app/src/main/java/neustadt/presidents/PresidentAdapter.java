@@ -31,7 +31,7 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
         public void onClick(View v){
-                onPresidentListener.onSelect(presidents, position, pictures);
+                onPresidentListener.onSelect(presidents, position);
             }
         });
     }
