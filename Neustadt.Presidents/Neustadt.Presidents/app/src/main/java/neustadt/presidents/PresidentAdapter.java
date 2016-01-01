@@ -1,8 +1,5 @@
 package neustadt.presidents;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +14,11 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
     this.presidents = presidents;
         this.pictures = pictures;
         this.onPresidentListener = onPresidentListener;
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return 0;
     }
 
     @Override
