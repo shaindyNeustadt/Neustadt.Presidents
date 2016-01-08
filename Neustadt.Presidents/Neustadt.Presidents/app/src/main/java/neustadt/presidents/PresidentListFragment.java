@@ -10,17 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class PresidentListFragment extends Fragment {
-private RecyclerView recyclerView;
-private President[] presidents;
-private int[] pictures;
+    private RecyclerView recyclerView;
+    private List<President> presidents;
+    private int[] pictures;
 
     @Nullable
     @Override
@@ -38,24 +41,36 @@ private int[] pictures;
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://raw.githubusercontent.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        InputStream in = getResources().openRawResource(R.raw.presidents);
+        PresidentsService service = retrofit.create(PresidentsService.class);
+        Call<List<President>> call = service.listPresidents();
+        call.enqueue(new Callback<List<President>>() {
 
-        presidents = gson.fromJson(new InputStreamReader(in), President[].class);
-        pictures = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f,
-                R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j, R.drawable.k, R.drawable.l, R.drawable.m, R.drawable.n,
-                R.drawable.o, R.drawable.p, R.drawable.q, R.drawable.r, R.drawable.s, R.drawable.t, R.drawable.u, R.drawable.v,
-                R.drawable.w, R.drawable.v, R.drawable.x, R.drawable.y, R.drawable.z, R.drawable.za, R.drawable.zb, R.drawable.zc,
-                R.drawable.zd, R.drawable.ze, R.drawable.zf, R.drawable.zg, R.drawable.zh, R.drawable.zi, R.drawable.zj, R.drawable.zk,
-                R.drawable.zl,R.drawable.zm, R.drawable.zn, R.drawable.zo, R.drawable.zk, R.drawable.zq};
+            @Override
+            public void onResponse(Response<List<President>> response) {
+                presidents = response.body();
 
-        OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
+                pictures = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f,
+                        R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j, R.drawable.k, R.drawable.l, R.drawable.m, R.drawable.n,
+                        R.drawable.o, R.drawable.p, R.drawable.q, R.drawable.r, R.drawable.s, R.drawable.t, R.drawable.u, R.drawable.v,
+                        R.drawable.w, R.drawable.v, R.drawable.x, R.drawable.y, R.drawable.z, R.drawable.za, R.drawable.zb, R.drawable.zc,
+                        R.drawable.zd, R.drawable.ze, R.drawable.zf, R.drawable.zg, R.drawable.zh, R.drawable.zi, R.drawable.zj, R.drawable.zk,
+                        R.drawable.zl, R.drawable.zm, R.drawable.zn, R.drawable.zo, R.drawable.zk, R.drawable.zq};
+                OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
+                PresidentAdapter adapter = new PresidentAdapter(presidents, pictures, listener);
+                recyclerView.setAdapter(adapter);
+            }
 
-        PresidentAdapter adapter = new PresidentAdapter(presidents, pictures, listener);
-        recyclerView.setAdapter(adapter);
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
 
         super.onViewCreated(view, savedInstanceState);
     }

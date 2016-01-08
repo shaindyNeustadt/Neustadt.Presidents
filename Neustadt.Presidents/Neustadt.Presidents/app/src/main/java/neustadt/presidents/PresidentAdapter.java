@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
     private President[] presidents;
     private int[] pictures;
@@ -33,7 +35,7 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
         public void onClick(View v){
-                onPresidentListener.onSelect(presidents, position);
+                onPresidentListener.onSelect(presidents, position, pictures);
             }
         });
     }
