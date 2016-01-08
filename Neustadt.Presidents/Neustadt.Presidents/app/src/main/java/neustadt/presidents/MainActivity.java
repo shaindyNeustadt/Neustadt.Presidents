@@ -7,10 +7,11 @@ import android.os.Bundle;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnPresidentSelectedListener{
-private PresidentListFragment listFragment;
-private PresidentDetailFragment detailFragment;
-private int[] pictures;
+public class MainActivity extends AppCompatActivity implements OnPresidentSelectedListener {
+    private PresidentListFragment listFragment;
+    private PresidentDetailFragment detailFragment;
+    private int[] pictures;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,17 +21,16 @@ private int[] pictures;
         listFragment =
                 (PresidentListFragment) manager.findFragmentById(R.id.PresidentListFragment);
         detailFragment =
-                (PresidentDetailFragment)manager.findFragmentById(R.id.detailFragment);
+                (PresidentDetailFragment) manager.findFragmentById(R.id.detailFragment);
 
 
     }
 
     @Override
-    public void onSelect(President[] presidents, int position,int[] pictures) {
-        if(detailFragment != null) {
+    public void onSelect(President[] presidents, int position, int[] pictures) {
+        if (detailFragment != null) {
             detailFragment.showPresidentDetail(presidents, position);
-        }
-        else{
+        } else {
             Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("PRESIDENTS", presidents);
             intent.putExtra("POSITION", position);

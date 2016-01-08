@@ -22,8 +22,6 @@ import retrofit2.Retrofit;
 
 public class PresidentListFragment extends Fragment {
     private RecyclerView recyclerView;
-    private List<President> presidents;
-    private int[] pictures;
 
     @Nullable
     @Override
@@ -42,7 +40,7 @@ public class PresidentListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com")
+                .baseUrl("http://raw.githubusercontent.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -52,16 +50,16 @@ public class PresidentListFragment extends Fragment {
 
             @Override
             public void onResponse(Response<List<President>> response) {
-                presidents = response.body();
+                List<President> presidents = response.body();
 
-                pictures = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f,
+                int[] pictures = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f,
                         R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j, R.drawable.k, R.drawable.l, R.drawable.m, R.drawable.n,
                         R.drawable.o, R.drawable.p, R.drawable.q, R.drawable.r, R.drawable.s, R.drawable.t, R.drawable.u, R.drawable.v,
                         R.drawable.w, R.drawable.v, R.drawable.x, R.drawable.y, R.drawable.z, R.drawable.za, R.drawable.zb, R.drawable.zc,
                         R.drawable.zd, R.drawable.ze, R.drawable.zf, R.drawable.zg, R.drawable.zh, R.drawable.zi, R.drawable.zj, R.drawable.zk,
                         R.drawable.zl, R.drawable.zm, R.drawable.zn, R.drawable.zo, R.drawable.zk, R.drawable.zq};
                 OnPresidentSelectedListener listener = (OnPresidentSelectedListener) getActivity();
-                PresidentAdapter adapter = new PresidentAdapter(presidents, pictures, listener);
+                PresidentAdapter adapter = new PresidentAdapter(presidents.toArray(new President[0]), pictures, listener);
                 recyclerView.setAdapter(adapter);
             }
 

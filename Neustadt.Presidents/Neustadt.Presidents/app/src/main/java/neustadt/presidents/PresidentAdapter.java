@@ -7,19 +7,19 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
+public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder> {
     private President[] presidents;
     private int[] pictures;
     private OnPresidentSelectedListener onPresidentListener;
 
-    public PresidentAdapter(President[] presidents, int[] pictures, OnPresidentSelectedListener onPresidentListener){
-    this.presidents = presidents;
+    public PresidentAdapter(President[] presidents, int[] pictures, OnPresidentSelectedListener onPresidentListener) {
+        this.presidents = presidents;
         this.pictures = pictures;
         this.onPresidentListener = onPresidentListener;
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         return 0;
     }
 
@@ -32,9 +32,9 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder>{
     @Override
     public void onBindViewHolder(final PresidentViewHolder holder, final int position) {
         holder.bind(presidents[position]);
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v){
+            public void onClick(View v) {
                 onPresidentListener.onSelect(presidents, position, pictures);
             }
         });

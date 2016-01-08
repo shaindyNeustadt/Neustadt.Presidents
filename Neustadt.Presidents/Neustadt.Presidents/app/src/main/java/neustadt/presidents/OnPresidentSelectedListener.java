@@ -4,5 +4,5 @@ package neustadt.presidents;
 import java.util.List;
 
 public interface OnPresidentSelectedListener {
-    void onSelect(President[] presidents, int position, int[] pictures);
+    void onSelect(President array[], int position, int[] pictures);
 }
